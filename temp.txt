@@ -1,0 +1,14 @@
+1)  Set hostname :
+https://markontech.com/posts/change-hostname-on-linux-using-ansible
+
+2) Changing ip addresses of multiple servers :
+https://unix.stackexchange.com/questions/655413/changing-ip-addresses-of-multiple-servers
+
+3) Configure etc/hosts file :
+https://serverfault.com/questions/832799/ansible-add-ips-from-inventory-to-etc-hosts-of-all-nodes
+
+4) Disable ufw :
+https://github.com/geerlingguy/ansible-role-firewall/blob/master/tasks/disable-other-firewalls.yml
+
+5) Disable swap :
+https://germaniumhq.com/2019/02/14/2019-02-14-Disabling-Swap-for-Kubernetes-in-an-Ansible-Playbook
