@@ -1,14 +1,30 @@
-1)  Set hostname :
-https://markontech.com/posts/change-hostname-on-linux-using-ansible
+sudo kubeadm init --control-plane-endpoint="192.168.56.118:6443"   --upload-certs   --apiserver-advertise-address=192.168.56.120 --pod-network-cidr=192.168.0.0/16 --cri-socket=unix:///var/run/cri-dockerd.sock  --ignore-preflight-errors=all 
 
-2) Changing ip addresses of multiple servers :
-https://unix.stackexchange.com/questions/655413/changing-ip-addresses-of-multiple-servers
+**********************************************************
 
-3) Configure etc/hosts file :
-https://serverfault.com/questions/832799/ansible-add-ips-from-inventory-to-etc-hosts-of-all-nodes
+1) Docker cgroup driver Config :
 
-4) Disable ufw :
-https://github.com/geerlingguy/ansible-role-firewall/blob/master/tasks/disable-other-firewalls.yml
+$ cat <<EOF | sudo tee /etc/docker/daemon.json
+{
+    "exec-opts": ["native.cgroupdriver=systemd"]
+}
 
-5) Disable swap :
-https://germaniumhq.com/2019/02/14/2019-02-14-Disabling-Swap-for-Kubernetes-in-an-Ansible-Playbook
+$ sudo systemctl daemon-reload
+$ sudo systemctl restart docker
+$ sudo systemctl restart kubelet
+
+**********************************************************
+
+3) Sysctl Config :
+
+cat <<EOF | sudo tee /etc/modules-load.d/k8s.conf
+br_netfilter
+EOF
+
+cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+EOF
+
+sudo sysctl --system
+
