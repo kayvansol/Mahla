@@ -13,7 +13,7 @@ $ sudo systemctl daemon-reload
 $ sudo systemctl restart docker
 $ sudo systemctl restart kubelet
 
-**********************************************************
+********************************************************** 
 
 3) Sysctl Config :
 
