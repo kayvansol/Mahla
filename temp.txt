@@ -27,4 +27,12 @@ net.bridge.bridge-nf-call-iptables = 1
 EOF
 
 sudo sysctl --system 
- 
+
+********************************************************** 
+
+kubectl exec -it  kayvan-release-spark-master-0 -- /bin/bash
+
+  ./bin/spark-submit \
+  --class org.apache.spark.examples.SparkPi \
+  --master spark://kayvan-release-spark-master-0.kayvan-release-spark-headless.default.svc.cluster.local:7077 \
+  ./examples/jars/spark-examples_2.12-3.4.1.jar 1000
